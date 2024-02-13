@@ -3,7 +3,7 @@ var path = require('path');
     var sgmfScripts = require('sgmf-scripts');
 
     module.exports = [{
-        mode: 'production',
+        mode: 'development',
         name: 'js',
         entry: sgmfScripts.createJsPath(),
         output: {
@@ -11,7 +11,7 @@ var path = require('path');
             filename: '[name].js'
         }
     }, {
-        mode: 'none',
+        mode: 'development',
         name: 'scss',
         entry: sgmfScripts.createScssPath(),
         output: {

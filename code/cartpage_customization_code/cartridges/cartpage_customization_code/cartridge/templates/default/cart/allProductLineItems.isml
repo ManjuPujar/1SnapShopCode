@@ -1,0 +1,15 @@
+<iscomment> 
+    replacing the product line items in cart page on undoing the removed products.
+</iscomment>
+<isloop items="${pdict.items}" var="lineItem">
+    <isif condition="${lineItem.productType === 'bundle'}">
+        <isinclude template="cart/productCard/cartBundleCard" />
+    <iselse/>
+        <isif condition="${lineItem.noProduct === true}">
+            <isinclude template="cart/productCard/uncategorizedCartProductCard" />
+        <iselse/>
+            <isinclude template="cart/productCard/cartProductCard" />
+        </isif>
+    </isif>
+    <div class="undo-removed-product-text-${lineItem.id} undo-removed-product-in-cart" productname="${lineItem.productName}" pid="${lineItem.id}" quantity="${lineItem.quantity}"></div>
+</isloop>
