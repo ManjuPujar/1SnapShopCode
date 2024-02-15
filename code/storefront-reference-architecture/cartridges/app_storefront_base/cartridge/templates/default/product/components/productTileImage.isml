@@ -6,7 +6,7 @@
              title="${product.images.medium[0].title}"
              />
     </a>
-    <isif condition="${pdict.display.showQuickView !== false}">
+    <isif condition="${pdict.display.showQuickView !== false && !pdict.display.isSimilarProducts}">
         <a class="quickview hidden-sm-down" href="${pdict.urls.quickView}"
            data-toggle="modal"
            data-target="#quickViewModal"

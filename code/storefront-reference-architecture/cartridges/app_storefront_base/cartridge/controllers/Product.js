@@ -36,6 +36,10 @@ server.get('Show', cache.applyPromotionSensitiveCache, consentTracking.consent, 
     var productHelper = require('*/cartridge/scripts/helpers/productHelpers');
     var showProductPageHelperResult = productHelper.showProductPage(req.querystring, req.pageMetaData);
     var productType = showProductPageHelperResult.product.productType;
+    var pdpCustomizationHelper = require('*/cartridge/scripts/pdpCustomizationHelper')
+    var productID = req.querystring.pid;
+    var primaryCategoryOfProduct = pdpCustomizationHelper.getPrimaryCategoryOfProduct(productID);
+    var onlineProductsInCategory = primaryCategoryOfProduct.getOnlineProducts().iterator().asList(0, 6);
     if (!showProductPageHelperResult.product.online && productType !== 'set' && productType !== 'bundle') {
         res.setStatusCode(404);
         res.render('error/notFound');
@@ -56,7 +60,8 @@ server.get('Show', cache.applyPromotionSensitiveCache, consentTracking.consent, 
                 resources: showProductPageHelperResult.resources,
                 breadcrumbs: showProductPageHelperResult.breadcrumbs,
                 canonicalUrl: showProductPageHelperResult.canonicalUrl,
-                schemaData: showProductPageHelperResult.schemaData
+                schemaData: showProductPageHelperResult.schemaData,
+                onlineProductsInCategory: onlineProductsInCategory
             });
         }
     }

@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('baseLayer/product/base');
+var base = require('../product/base');
 var focusHelper = require('baseLayer/components/focus');
 var location = window.location;
 
@@ -405,7 +405,7 @@ module.exports = function () {
                         + '</div>');
                     setTimeout(function() {
                         $('.cart-empty-msg').removeClass('d-none')
-                        $('.cart-empty-msg').fadeIn(fast);
+                        $('.cart-empty-msg').fadeIn('fast');
                     }, 5000);
                 } else {
                     if (data.toBeDeletedUUIDs && data.toBeDeletedUUIDs.length > 0) {

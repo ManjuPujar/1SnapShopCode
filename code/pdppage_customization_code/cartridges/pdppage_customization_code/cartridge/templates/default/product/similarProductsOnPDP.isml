@@ -1,0 +1,23 @@
+<div class="modal fade similar-products-on-pdp" id="similarProductsOnPDP" tabindex="-1" role="dialog" aria-labelledby="horizontalModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="horizontalModalLabel"><isprint value="${'Similar Products'}" encoding="on" /></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="horizontal-scrollable">
+                    <div class="row">
+                        <isloop items="${pdict.onlineProductsInCategory}" var="product" status="loopState">
+                            <div class="col-3 col-sm-4 scroll-bar">
+                                <isinclude url="${URLUtils.url('Tile-Show', 'pid', product.ID, 'swatches', true, 'ratings', true, 'isSimilarProducts', isSimilarProducts)}"/>
+                            </div>
+                        </isloop>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

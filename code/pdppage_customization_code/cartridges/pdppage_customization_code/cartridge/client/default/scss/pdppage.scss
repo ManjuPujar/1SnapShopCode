@@ -1,0 +1,51 @@
+/**
+* similar products modal button
+*/
+
+.similar-products-button {
+    width: 100%;
+    height: 8%;
+    position: absolute;
+    left: 50%;
+    margin-top: 10%;
+    transform: translate(-50%, -50%);
+}
+
+.primary-images + .similar-products-button {
+    margin-top: 10px;
+}
+
+
+.description-and-detail {
+    margin-top: 10%;
+}
+
+
+/**
+* modal Css to show horizontal
+*/
+.similar-products-on-pdp {
+    .horizontal-scrollable {
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
+     
+    .horizontal-scrollable .row {
+        display:block;
+    }
+     
+    .horizontal-scrollable .scroll-bar {
+        display: inline-block;
+        float: none;
+        padding: 15px;
+    }
+    
+    .modal-dialog {
+        max-width: 1000px;
+    }
+
+    .modal-content .modal-title {
+        font-weight: bold;
+    }
+}
