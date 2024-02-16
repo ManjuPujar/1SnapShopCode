@@ -1,0 +1,18 @@
+
+<isif condition="${!empty(product.recommendationProducts) && product.recommendationProducts}">
+    <div class="headline-recommendation-products">
+        <isprint value="${'Recommendation Products'}" encoding="off" />
+    </div>
+    <div class="recommendation-tile-on-pdp">
+        <div class="row">
+            <isloop items="${product.recommendationProducts}" var="product" status="loopState">
+                <isobject object="${product}" view="recommendation">
+                    <div class=" row col-6 col-sm-4">
+                        <isinclude url="${URLUtils.url('Tile-Show', 'pid', product.recommendedItem.ID, 'swatches', true, 'ratings', true)}"/>
+                    </div>
+                </isobject>
+            </isloop>
+        </div>
+    </div>
+</isif>
+

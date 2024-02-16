@@ -49,3 +49,26 @@
         font-weight: bold;
     }
 }
+
+/*
+* For Recomendation Products displaying on PDP
+*/
+
+.recommendation-tile-on-pdp {
+    max-width: 1000px;
+    justify-content: space-around;
+    display: flex;
+    margin-left: 6%;
+}
+.headline-recommendation-products {
+    font-weight: bold;
+    align-items: center;
+    font-size: xx-large;
+    display: flex;
+    border-style: groove;
+    max-width: 75%;
+    justify-content: space-around;
+    margin-left: 13%;
+    background-color: gainsboro;
+    margin-bottom: 1%;
+}
