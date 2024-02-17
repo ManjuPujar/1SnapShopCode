@@ -35,7 +35,7 @@
   ],
   "paths": {
     "cartLayer": "../cartpage_customization_code/cartridges/cartpage_customization_code/",
-    "baseLayer": "../storefront-reference-architecture/cartridges/app_storefront_base/"
+    "base": "../storefront-reference-architecture/cartridges/app_storefront_base/"
   },
   "dependencies": {
     "bootstrap": "^5.3.2",

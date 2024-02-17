@@ -24,7 +24,7 @@ var bootstrapPackages = {
 
 module.exports = [
     {
-        mode: 'production',
+        mode: 'development',
         name: 'js',
         entry: jsFiles,
         output: {
@@ -53,7 +53,7 @@ module.exports = [
         plugins: [new webpack.ProvidePlugin(bootstrapPackages)]
     },
     {
-        mode: 'none',
+        mode: 'development',
         name: 'scss',
         entry: scssFiles,
         output: {

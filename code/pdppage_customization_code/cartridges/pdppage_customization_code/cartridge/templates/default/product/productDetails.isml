@@ -3,9 +3,9 @@
     <isscript>
         var assets = require('*/cartridge/scripts/assets');
         assets.addJs('/js/productDetail.js');
+        assets.addJs('/js/wishlist.js')
         assets.addCss('/css/product/detail.css');
         assets.addCss('/css/pdppage.css');
-        assets.addJs('/js/productTile.js');
     </isscript>
     <isset name="isSimilarProducts" value="${pdict.isSimilarProducts && !empty(pdict.isSimilarProducts)}" scope="page" />
     <isset name="product" value="${pdict.product}" scope="page" />
@@ -136,7 +136,7 @@
             <div>
                 <isslot id="cts-recommendations-m" description="Complete the set products" context="global" context-object="${pdict.product.raw}" />
             </div>
-
+            
             <isset name="loopState" value="${{count: 1}}" scope="page" />
             <isinclude template="product/components/descriptionAndDetails" />
 
@@ -144,7 +144,8 @@
                 <isslot id="product-recommendations-m" description="Recommended products" context="global" context-object="${pdict.product.raw}" />
             </div>
         </div>
+        <isinclude template="product/recommendationProductsOnPDP" sf-toolkit="on" />
         <isinclude template="product/similarProductsOnPDP" sf-toolkit="on" />
-        
     </isobject>
 </isdecorate>
+

@@ -282,6 +282,55 @@ function confirmDelete(actionUrl, productID, productName, uuid) {
     $productToRemoveSpan.empty().append(productName);
 }
 
+function addRemovedProductToCart() {
+    $('body').on('click', '.click-to-undo-removed-product', function(e) {
+        e.preventDefault();
+        var addToCartUrl = $('input[name="addtocartUrl"]').val();
+        var productID = this.closest('.undo-removed-product-in-cart').getAttribute('pid');
+        var selectedQuantity = this.closest('.undo-removed-product-in-cart').getAttribute('quantity');
+        var form = {
+            pid: productID,
+            quantity: selectedQuantity
+        }
+        $.spinner().start();
+        $.ajax({
+            url: addToCartUrl,
+            method: 'POST',
+            data: form,
+            success: function (data) {
+                base.handlePostCartAdd(data);
+                $('body').trigger('product:afterAddToCart', data);
+                base.miniCartReportingUrl(data.reportingURL);
+                $('.all-product-lineitems-on-cartpage').empty().html(data.undoremovedproductlineitem);
+                /**
+                 * updating price section in cart page and number of items
+                 */
+                $('.number-of-items').empty().append(data.cart.resources.numberOfItems);
+                    $('.minicart-quantity').empty().append(data.cart.numItems);
+                    $('.minicart-link').attr({
+                        'aria-label': data.cart.resources.minicartCountOfItems,
+                        title: data.cart.resources.minicartCountOfItems
+                    });
+                $('.number-of-items').empty().append(data.cart.numItems);
+                $('.coupons-and-promos').empty().append(data.cart.totals.discountsHtml);
+                updateCartTotals(data.cart);
+                updateApproachingDiscounts(data.cart.approachingDiscounts);
+                $('body').trigger('setShippingMethodSelection', data.cart);
+                validateBasket(data.cart);
+                $('.cart .totals').hasClass('d-none') ?  $('.cart .totals').removeClass('d-none') : '';
+                $.spinner().stop();
+            },
+            error: function () {
+                $.spinner().stop();
+            }
+        })
+    });
+}
+
+function productRemoveMsg(removedProductName) {
+    removedProductName = (removedProductName !== null && removedProductName !== 'undefined') ? ('~ ' + removedProductName) : '';
+    return '<div class="option-to-undo-productcss">' + '<span>Simply tap </span>' + '<a href="" class="click-to-undo-removed-product">Undo</a>' + '<span> to bring the removed product back to your cart </span>' + '<br></br>' + '<span class="removed-product-name-cart">' + removedProductName + '</span>' + '</div>';
+}
 module.exports = function () {
     $('body').on('click', '.remove-product', function (e) {
         e.preventDefault();
@@ -328,11 +377,6 @@ module.exports = function () {
             dataType: 'json',
             success: function (data) {
                 if (data.basket.items.length === 0) {
-                    $('.cart').empty().append('<div class="row"> '
-                        + '<div class="col-12 text-center"> '
-                        + '<h1>' + data.basket.resources.emptyCartMsg + '</h1> '
-                        + '</div> '
-                        + '</div>');
                     $('.number-of-items').empty().append(data.basket.resources.numberOfItems);
                     $('.minicart-quantity').empty().append(data.basket.numItems);
                     $('.minicart-link').attr({
@@ -343,6 +387,25 @@ module.exports = function () {
                     $('.minicart .popover').removeClass('show');
                     $('body').removeClass('modal-open');
                     $('html').removeClass('veiled');
+                    var undoMsgDivClassName = '.undo-removed-product-text-' + productID;
+                    var removedProductName = $(undoMsgDivClassName).attr('productName');
+                    $(undoMsgDivClassName).empty().html(productRemoveMsg(removedProductName));
+                    var undoproductDivMsg = $(undoMsgDivClassName);
+                    $('.all-product-lineitems-on-cartpage').empty().html(undoproductDivMsg);
+                    $('.cart .totals').addClass('d-none');
+                    setTimeout(function() {
+                        $(undoMsgDivClassName).empty();
+                    }, 5000);
+
+                    $('.all-product-lineitems-on-cartpage').append('<div class="row cart-empty-msg d-none"> '
+                        + '<div class="col-12 text-center"> '
+                        + '<h1>' + data.basket.resources.emptyCartMsg + '</h1> '
+                        + '</div> '
+                        + '</div>');
+                    setTimeout(function() {
+                        $('.cart-empty-msg').removeClass('d-none')
+                        $('.cart-empty-msg').fadeIn('fast');
+                    }, 5000);
                 } else {
                     if (data.toBeDeletedUUIDs && data.toBeDeletedUUIDs.length > 0) {
                         for (var i = 0; i < data.toBeDeletedUUIDs.length; i++) {
@@ -358,6 +421,12 @@ module.exports = function () {
                     updateApproachingDiscounts(data.basket.approachingDiscounts);
                     $('body').trigger('setShippingMethodSelection', data.basket);
                     validateBasket(data.basket);
+                    var undoMsgDivClassName = '.undo-removed-product-text-' + productID;
+                    var removedProductName = $(undoMsgDivClassName).attr('productName');
+                    $(undoMsgDivClassName).empty().html(productRemoveMsg(removedProductName));
+                    setTimeout(function() {
+                        $(undoMsgDivClassName).empty();
+                    }, 5000);
                 }
 
                 $('body').trigger('cart:update', data);
@@ -762,4 +831,5 @@ module.exports = function () {
     base.focusChooseBonusProductModal();
     base.trapChooseBonusProductModalFocus();
     base.onClosingChooseBonusProductModal();
+    addRemovedProductToCart();
 };

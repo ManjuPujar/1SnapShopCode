@@ -10,9 +10,10 @@ var base = module.superModule;
 server.extend(base);
 
 var cache = require('*/cartridge/scripts/middleware/cache');
+var ProductMgr = require('dw/catalog/ProductMgr');
 
 /**
-  * Product-Show : This endpoint is called to show the details of the selected product
+  * Product-Show : The mentioned middleware step is used to show Similar Products on PDP
   * @name Base/Product-Show
   * @function
   * @memberof Product

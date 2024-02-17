@@ -852,5 +852,6 @@ module.exports = {
 
     getPidValue: getPidValue,
     getQuantitySelected: getQuantitySelected,
-    miniCartReportingUrl: miniCartReportingUrl
+    miniCartReportingUrl: miniCartReportingUrl,
+    handlePostCartAdd: handlePostCartAdd
 };
