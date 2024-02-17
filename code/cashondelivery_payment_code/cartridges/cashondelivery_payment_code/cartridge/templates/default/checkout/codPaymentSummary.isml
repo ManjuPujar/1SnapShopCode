@@ -1,0 +1,6 @@
+<div class="cod-summary">
+    <isprint value="${Resource.msg('cod.summary.payment.method', 'cashondelivery_payment', null)}" encoding="on" />
+    <br>
+    <span>${Resource.msg('cod.summary.total.cost', 'cashondelivery_payment', null)}</span>
+    <span>${pdict.order.priceTotal}</span>
+</div>

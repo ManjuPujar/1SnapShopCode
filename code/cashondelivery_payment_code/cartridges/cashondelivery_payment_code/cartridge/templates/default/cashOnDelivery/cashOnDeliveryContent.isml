@@ -1,0 +1,16 @@
+<!--- CASH ON DELIVERY --->
+<isset name="codFields" value="${pdict.forms.billingForm.codfield}" scope="page" />
+
+<div class="tab-pane codpayment_method_option" id="codpayment_method_option" role="tabpanel">
+    <fieldset class="payment-form-fields">
+        <!--- payment method is credit card --->
+        <input type="hidden" class="form-control"
+               name="${pdict.forms.billingForm.paymentMethod.htmlName}"
+               value="CASH_ON_DELIVERY"
+        >
+        <!--- using feilds to more info of customer --->
+        <fieldset class="cashOnDelivery-form">
+            <isinclude template="checkout/billing/codform" sf-toolkit="on" />
+        </fieldset>
+    </fieldset>
+</div>

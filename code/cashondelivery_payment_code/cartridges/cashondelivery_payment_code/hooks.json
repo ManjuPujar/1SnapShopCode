@@ -1,0 +1,12 @@
+{
+    "hooks": [
+        {
+            "name": "app.payment.processor.cod",
+            "script": "./cartridge/scripts/hooks/payment/processor/cash_on_delivery"
+        },
+        {
+            "name": "app.payment.form.processor.cod",
+            "script": "./cartridge/scripts/hooks/payment/processor/cod_form_processor"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+<p>${Resource.msg('description.for.cash.on.delivery.method', 'cashondelivery_payment', 'Pay with Cash')}</p>
+<div id="codpayment_method_option">
+    <div class="form-group custom-control custom-checkbox
+    <isif condition=${codFields.comfirmcodcheck.mandatory === true}>required</isif>">
+        <input
+            type="checkbox"
+            class="custom-control-input" id="cod-check-box-confirmation"
+        >
+        <label class="custom-control-label" for="cod-check-box-confirmation">
+            <isprint value="${Resource.msg(codFields.comfirmcodcheck.label, 'cashondelivery_payment', 'Pay with Cash')}" encoding="htmlcontent" />
+        </label>
+    </div>
+</div>
